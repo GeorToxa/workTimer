@@ -25,6 +25,7 @@ class Menu(QWidget):
         # self.db.drop_table()
         # self.db.delete_table()
         self.db.create_table()
+        # self.db.fill_table(100)
 
 
         self.logic.windowSettings(self, "Menu")    # Window settings

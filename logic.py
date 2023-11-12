@@ -35,7 +35,6 @@ class Logic:
             # Time
             time_in_seconds = data[i][3]
             hours, minutes, seconds = Logic.seconds_to_hms(time_in_seconds)
-            print(window)
             timerLine = QLineEdit(f"{hours:02}:{minutes:02}:{seconds:02}")
             timerLine.setMaximumHeight(30)
             timerLine.setMinimumHeight(30)
@@ -43,7 +42,6 @@ class Logic:
             editBtn = QPushButton("Edit")
             editBtn.setMaximumHeight(30)
             editBtn.setMinimumHeight(30)
-            print(i)
             editBtn.clicked.connect(lambda _, index=i: Logic.moveToAnotherWindow(window, EditTask(data[index][0])))
             timerBtn = QPushButton("Timer")
             timerBtn.setMaximumHeight(30)
@@ -114,16 +112,32 @@ class Logic:
     # Loading css styles
     @staticmethod
     def cssLoader():
-        with open("../../styles/styles.css", "r") as read:
+        with open("../../styles/styles.css", "r", encoding="utf-8") as read:
             style = read.read()
             read.close()
-
+        if style == "":
+            with open("../styles/styles.css", "r", encoding="utf-8") as read:
+                style = read.read()
+                read.close()
         return style
+
+    # Additional method for setting window icon
+    def setWindowIcon_(self):
+        try:
+            from PyQt5.QtWinExtras import QtWin
+
+            myappid = 'geortoxa.bigproject.workTimer.1'
+            QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+
+        except ImportError:
+            pass
 
     # Settings windows
     @staticmethod
     def windowSettings(window, title):
         window.setWindowIcon(QtGui.QIcon("../timer.ico"))
+
+        Logic.setWindowIcon_(window)
         window.setWindowTitle(title)
         window.setMinimumSize(700, 500)
         window.setStyleSheet(Logic.cssLoader())

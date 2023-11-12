@@ -77,9 +77,11 @@ class TasksList(QWidget):
             timerLine.setDisabled(True)
             editBtn = QPushButton("Edit")
             editBtn.setMinimumHeight(30)
+            editBtn.setMinimumWidth(75)
             editBtn.clicked.connect(lambda _, index=i: self.logic.moveToAnotherWindow(self, EditTask(self.data[index][0])))
             timerBtn = QPushButton("Timer")
             timerBtn.setMinimumHeight(30)
+            timerBtn.setMinimumWidth(75)
             timerBtn.clicked.connect(lambda _, index=i: self.logic.moveToAnotherWindow(self, TimerTask(self.data[index][0])))
 
             hbox = QHBoxLayout()
