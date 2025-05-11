@@ -112,13 +112,9 @@ class Logic:
     # Loading css styles
     @staticmethod
     def cssLoader():
-        with open("../../styles/styles.css", "r", encoding="utf-8") as read:
+        with open("../styles/styles.css", "r", encoding="utf-8") as read:
             style = read.read()
             read.close()
-        if style == "":
-            with open("../styles/styles.css", "r", encoding="utf-8") as read:
-                style = read.read()
-                read.close()
         return style
 
     # Additional method for setting window icon
